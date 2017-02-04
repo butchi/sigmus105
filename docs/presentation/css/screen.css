@@ -1,0 +1,501 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: #000;
+  font-family: Verdana, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+
+.wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 320px;
+  height: 200px;
+  margin-left: -160px;
+  margin-top: -100px;
+}
+
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.page h1 {
+  text-align: center;
+  font-size: 24px;
+  padding: 10px 0;
+  line-height: 1.3em;
+}
+.page ul {
+  list-style: disc;
+  list-style-position: inside;
+}
+.page sub {
+  vertical-align: sub;
+  font-size: 50%;
+}
+.page sup {
+  vertical-align: super;
+  font-size: 50%;
+}
+.page .lines {
+  padding: 0 16px;
+}
+.page .lines .line {
+  line-height: 1.2em;
+  padding: 0.2em 0;
+}
+.page .image {
+  font-size: 0;
+  vertical-align: top;
+}
+.page.page-top .group .author {
+  text-align: center;
+}
+
+.page {
+  display: none;
+  background-color: #fff;
+}
+.page.active {
+  display: block;
+}
+
+.wrapper.view-presentation .page {
+  display: block;
+  position: absolute;
+}
+.wrapper.view-expand .page {
+  display: block;
+  position: relative;
+}
+
+.site-url {
+  position: absolute;
+  left: 3px;
+  bottom: 3px;
+  background-color: #fff;
+  font-size: 10px;
+  color: #666;
+  -moz-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  -webkit-transform: scale(0.7);
+  transform: scale(0.7);
+  -moz-transform-origin: 0 100%;
+  -ms-transform-origin: 0 100%;
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+}
+.site-url a {
+  color: inherit;
+}
+
+.block-nav {
+  position: fixed;
+  width: 100%;
+  height: 0;
+  bottom: 0;
+  right: 0;
+}
+.block-nav .btn-option {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  opacity: 0.7;
+  cursor: pointer;
+  padding: 5px;
+}
+.block-nav .btn-option img {
+  width: 20px;
+  height: 20px;
+}
+.block-nav .settings {
+  display: none;
+  position: absolute;
+  right: 40px;
+  bottom: 5px;
+}
+.block-nav .settings.show {
+  display: block;
+}
+.block-nav .settings .view-mode {
+  float: left;
+}
+.block-nav .settings .page-control {
+  float: left;
+}
+.block-nav .settings .page-control li {
+  float: left;
+}
+.block-nav .settings .list-page {
+  float: left;
+}
+
+.page.page-top .site {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #fff;
+  font-size: 12px;
+}
+.page.introduction .image {
+  font-size: 0;
+  text-align: center;
+  padding-bottom: 10px;
+}
+.page.introduction .image img {
+  width: auto;
+  height: 80px;
+}
+.page.intro-raster .image {
+  text-align: center;
+}
+.page.intro-raster .image img {
+  width: auto;
+  height: 100px;
+}
+.page.intro-raster .footnote {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  font-size: 6px;
+}
+.page.wolfram-tones .image {
+  text-align: center;
+}
+.page.wolfram-tones .image img {
+  width: auto;
+  height: 100px;
+  border: 1px solid #999;
+}
+.page.fractmus .image {
+  text-align: center;
+}
+.page.fractmus .image img {
+  width: auto;
+  height: 100px;
+}
+.page.scanned-synthesis .image {
+  text-align: center;
+  margin-bottom: 5px;
+}
+.page.scanned-synthesis .image img {
+  width: 100px;
+}
+.page.scanned-synthesis .audio {
+  text-align: center;
+  -moz-transform: scale(0.3);
+  -ms-transform: scale(0.3);
+  -webkit-transform: scale(0.3);
+  transform: scale(0.3);
+}
+.page.scanned-synthesis .audio audio {
+  width: 300px;
+}
+.page.scanned-synthesis .footnote {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  font-size: 6px;
+}
+.page.closynth .link-closynth {
+  font-size: 80%;
+}
+.page.closynth .image {
+  text-align: center;
+}
+.page.closynth .image img {
+  width: auto;
+  height: 90px;
+  border: 1px solid #999;
+}
+.page.oneliner .embed {
+  text-align: center;
+}
+.page.carpet-fractal-definition .image, .page.carpet-fractal-definition-2 .image {
+  text-align: center;
+}
+.page.carpet-fractal-definition .image img, .page.carpet-fractal-definition-2 .image img {
+  width: auto;
+  height: 80px;
+}
+.page.carpet-fractal-example-1 .figure-list, .page.carpet-fractal-example-2 .figure-list, .page.carpet-fractal-example-3 .figure-list {
+  text-align: center;
+}
+.page.carpet-fractal-example-1 .figure-list figure, .page.carpet-fractal-example-2 .figure-list figure, .page.carpet-fractal-example-3 .figure-list figure {
+  vertical-align: top;
+  display: inline-block;
+}
+.page.carpet-fractal-example-1 .figure-list figure img, .page.carpet-fractal-example-2 .figure-list figure img, .page.carpet-fractal-example-3 .figure-list figure img {
+  width: auto;
+  height: 100px;
+}
+.page.carpet-fractal-example-1 .figure-list figure figcaption, .page.carpet-fractal-example-2 .figure-list figure figcaption, .page.carpet-fractal-example-3 .figure-list figure figcaption {
+  font-size: 12px;
+  padding-top: 10px;
+}
+.page.carpet-fractal-example-1 .figure-list figure + figure, .page.carpet-fractal-example-2 .figure-list figure + figure, .page.carpet-fractal-example-3 .figure-list figure + figure {
+  margin-left: 20px;
+}
+.page.method-raster .image {
+  text-align: center;
+}
+.page.method-raster .image img {
+  width: auto;
+  height: 120px;
+}
+.page.wave-form .example .image {
+  text-align: center;
+  margin-bottom: 0px;
+}
+.page.wave-form .example .image img {
+  width: 50px;
+}
+.page.wave-form .example .audio {
+  text-align: center;
+  -moz-transform: scale(0.3);
+  -ms-transform: scale(0.3);
+  -webkit-transform: scale(0.3);
+  transform: scale(0.3);
+}
+.page.wave-form .image {
+  text-align: center;
+}
+.page.wave-form .image img {
+  width: 270px;
+  height: auto;
+}
+.page.demo-4x4 .link-jsdoit {
+  font-size: 80%;
+}
+.page.experiment-generator-size .example .heading {
+  text-align: left;
+  padding-left: 30px;
+}
+.page.experiment-generator-size .example .image {
+  text-align: center;
+  margin-bottom: 5px;
+}
+.page.experiment-generator-size .example .image img {
+  width: 250px;
+}
+.page.experiment-generator-size .example .audio {
+  text-align: center;
+  -moz-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+}
+.page.experiment-generator-size .example + .example {
+  margin-top: 10px;
+}
+.page.experiment-rotation90deg .example, .page.experiment-rotation180deg .example, .page.experiment-swap .example {
+  display: block;
+  width: 150px;
+  float: left;
+}
+.page.experiment-rotation90deg .example .image, .page.experiment-rotation180deg .example .image, .page.experiment-swap .example .image {
+  text-align: center;
+  margin-bottom: 5px;
+}
+.page.experiment-rotation90deg .example .image img, .page.experiment-rotation180deg .example .image img, .page.experiment-swap .example .image img {
+  width: 60px;
+}
+.page.experiment-rotation90deg .example .audio, .page.experiment-rotation180deg .example .audio, .page.experiment-swap .example .audio {
+  text-align: center;
+  -moz-transform: scale(0.3);
+  -ms-transform: scale(0.3);
+  -webkit-transform: scale(0.3);
+  transform: scale(0.3);
+}
+.page.experiment-rotation90deg .example .audio audio, .page.experiment-rotation180deg .example .audio audio, .page.experiment-swap .example .audio audio {
+  width: 300px;
+}
+.page.experiment-rotation90deg .example + .example, .page.experiment-rotation180deg .example + .example, .page.experiment-swap .example + .example {
+  margin-left: 0px;
+}
+.page.granular-synthesis-experiment .image {
+  text-align: center;
+  margin-bottom: 5px;
+}
+.page.granular-synthesis-experiment .image img {
+  width: 70px;
+}
+.page.granular-synthesis-experiment .audio {
+  text-align: center;
+  -moz-transform: scale(0.3);
+  -ms-transform: scale(0.3);
+  -webkit-transform: scale(0.3);
+  transform: scale(0.3);
+}
+.page.granular-synthesis-experiment .audio audio {
+  width: 300px;
+}
+.page.generate-oneliner .image {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.page.generate-oneliner .image img {
+  width: 70px;
+}
+.page.generate-oneliner .audio {
+  text-align: center;
+  -moz-transform: scale(0.3);
+  -ms-transform: scale(0.3);
+  -webkit-transform: scale(0.3);
+  transform: scale(0.3);
+}
+.page.generate-oneliner .audio audio {
+  width: 300px;
+}
+.page.walsh .example {
+  display: block;
+  width: 150px;
+  position: relative;
+  left: 50%;
+  margin-left: -75px;
+}
+.page.walsh .example .image {
+  text-align: center;
+  margin-bottom: 5px;
+}
+.page.walsh .example .image img {
+  width: 110px;
+}
+.page.walsh .example .audio {
+  text-align: center;
+  -moz-transform: scale(0.3);
+  -ms-transform: scale(0.3);
+  -webkit-transform: scale(0.3);
+  transform: scale(0.3);
+}
+.page.walsh .example .audio audio {
+  width: 300px;
+}
+.page.walsh .example + .example {
+  margin-left: 0px;
+}
+.page.self-additional .example, .page.carpet-fourier .example {
+  display: block;
+  width: 300px;
+  position: relative;
+  left: 50%;
+  margin-left: -150px;
+  text-align: center;
+}
+.page.self-additional .example .image, .page.carpet-fourier .example .image {
+  display: inline-block;
+  width: 90px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+.page.self-additional .example .image img, .page.carpet-fourier .example .image img {
+  width: 80px;
+}
+.page.self-additional .example .audio, .page.carpet-fourier .example .audio {
+  text-align: center;
+  -moz-transform: scale(0.3);
+  -ms-transform: scale(0.3);
+  -webkit-transform: scale(0.3);
+  transform: scale(0.3);
+}
+.page.self-additional .example .audio audio, .page.carpet-fourier .example .audio audio {
+  width: 300px;
+}
+.page.self-additional .example + .example, .page.carpet-fourier .example + .example {
+  margin-left: 0px;
+}
+
+.theme-sierpinski .page h1 {
+  color: #fff;
+  background-color: #54f;
+  background-image: url('../img/bg_l.png?1414931759'), url('../img/bg_r.png?1414931791');
+  background-repeat: no-repeat, no-repeat;
+  background-size: auto 100%, auto 100%;
+  background-position: 0% 0%, 100% 100%;
+  padding: 5px 0;
+  margin-bottom: 5px;
+}
+.theme-sierpinski .page.page-top h1 {
+  background: none;
+  background-color: #54f;
+  color: #fff;
+  padding-top: 50px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  background-image: url('../img/bg_l.png?1414931759');
+  background-repeat: no-repeat;
+  background-size: auto 64px;
+  background-position: 0 0;
+}
+.theme-sierpinski .page.page-section h1 {
+  position: absolute;
+  height: 50px;
+  line-height: 50px;
+  top: 50%;
+  margin-top: -25px;
+  width: 100%;
+  color: #fff;
+  background-color: #54f;
+}

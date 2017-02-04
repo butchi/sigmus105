@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>カーペットフラクタルの可聴化と音楽生成</title>
+    <link href="./css/screen.css" media="screen, projection" rel="stylesheet" />
+</head>
+<body class="theme-sierpinski">
+
+<div class="wrapper">
+    <section class="page page-top">
+        <p class="site">第105回 音楽情報科学研究会</p>
+        <div class="group">
+            <h1>カーペットフラクタルの<br>可聴化と音楽生成</h1>
+            <p class="author">カヤック 岩淵勇樹</p>
+        </div>
+    </section>
+    <section class="page introduction">
+        <h1>はじめに</h1>
+        <div class="lines">
+            <p class="line">この画像を聴いてください</p>
+            <p class="image"><img src="./img/4x4_1111110011111110.png" alt=""></p>
+            <p class="audio"><audio src="./audio/4x4_1111110011111110.wav" controls></p>
+        </div>
+    </section>
+    <section class="page">
+        <h1>これは何なのか</h1>
+        <div class="lines">
+            <p class="line">シェルピンスキーのカーペットを拡張した「カーペットフラクタル」</p>
+            <p class="line">それをラスタスキャンによってサンプリングし可聴化</p>
+        </div>
+    </section>
+    <section class="page page-section">
+        <h1>背景と関連研究</h1>
+    </section>
+    <section class="page">
+        <h1>背景</h1>
+        <div class="lines">
+            <p class="line">人の手を介さない「生成音楽」</p>
+            <p class="line">特に数学的なデータを用いるものも数多い</p>
+        </div>
+    </section>
+    <section class="page wolfram-tones">
+        <h1>WolframTones</h1>
+        <p class="image"><img src="./img/wolfram_tones.png" alt=""></p>
+        <div class="lines">
+            <p class="line"><a href="http://tones.wolfram.com/" target="_blank">WolframTones</a></p>
+        </div>
+    </section>
+    <section class="page fractmus">
+        <h1>FractMus</h1>
+        <p class="image"><img src="./img/fractmus.gif" alt=""></p>
+        <div class="lines">
+            <p class="line"><a href="http://www.gustavodiazjerez.com/?cat=14" target="_blank">FractMus</a></p>
+        </div>
+    </section>
+    <section class="page scanned-synthesis">
+        <h1>Scanned Synthesis</h1>
+        <p class="image"><img src="./img/scanned_synthesis.gif" alt="Scanned Synthesis"></p>
+        <div class="lines">
+            <p class="line">物理モデル上を曲線でスキャン</p>
+            <p class="line">→フラクタルを走査線でスキャン</p>
+        </div>
+        <p class="footnote"><a href="http://www.csounds.com/scanned/toot/" target="_blank">出典</a></p>
+    </section>
+    <section class="page granular-synthesis">
+        <h1>Granular Synthesis</h1>
+        <div class="lines">
+            <p class="line">Granular Synthesis（細粒合成，グラニュラー合成）</p>
+            <p class="line">粒子状の音を多数配置して音声を生成</p>
+        </div>
+    </section>
+    <section class="page closynth">
+        <h1>これまでの研究</h1>
+        <div class="lines">
+            <p class="line">CloSynth（MUS85で発表）</p>
+            <p class="line link-closynth"><a href="http://butchi.jp/documents/mus85demo/" target="_blank">http://butchi.jp/documents/mus85demo/</a></p>
+        </div>
+        <p class="image"><img src="./img/closynth.png" alt=""></p>
+    </section>
+    <section class="page probrem">
+        <h1>問題点</h1>
+        <ul class="lines">
+            <li class="line">音色かメロディしか生成できない</li>
+            <li class="line">さまざまなデータの可聴化には向かない</li>
+        </ul>
+    </section>
+    <section class="page intro-raster">
+        <h1>着想元1</h1>
+        <div class="lines">
+            <p class="line">画像のラスタスキャンによる音声信号生成</p>
+        </div>
+        <p class="image"><img src="./img/yeo_raster.png" alt=""></p>
+        <p class="footnote"><a href="https://ccrma.stanford.edu/~woony/publications/Yeo_Berger-ICMC06.pdf" target="_blank">出典</a></p>
+    </section>
+    <section class="page oneliner">
+        <h1>着想元2</h1>
+        <div class="lines">
+            <p class="line"><a href="https://www.youtube.com/watch?v=GtQdIYUtAHg" target="_blank">ワンライン音楽</a></p>
+        </div>
+        <p class="embed"><iframe width="200" height="100" src="http://www.youtube.com/embed/GtQdIYUtAHg" frameborder="0" allowfullscreen></iframe></p>
+    </section>
+    <section class="page">
+        <h1>カーペットフラクタル</h1>
+        <div class="lines">
+            <p class="line">配列の自己演算による平面的なフラクタル図形（「カーペットフラクタル」は造語）
+            <p class="text">これを鳴らしたらどうなるか？</p>
+        </div>
+    </section>
+    <section class="page page-section">
+        <h1>原理</h1>
+    </section>
+    <section class="page carpet-fractal-definition">
+        <h1>カーペットフラクタルの定義</h1>
+        <div class="lines">
+            <p class="line">ジェネレータ B</p>
+            <p class="line">置換{1 → B, 0 → 0B}</p>
+        </div>
+        <p class="image"><img src="./img/carpet_replace.svg" alt=""></p>
+    </section>
+    <section class="page carpet-fractal-definition-2">
+        <h1>カーペットフラクタルの定義</h1>
+        <div class="lines">
+            <p class="line">ジェネレータ B</p>
+            <p class="line">置換{1 → B, 0 → 0B}</p>
+        </div>
+        <p class="image"><img src="./img/carpet_replace_2.svg" alt=""></p>
+    </section>
+    <section class="page carpet-fractal-example-2">
+        <h1>カーペットフラクタルの定義</h1>
+        <div class="figure-list">
+            <figure>
+                <img src="./img/sierpinski_gasket.png" alt="">
+                <figcaption>G<sub>10</sub> シェルピンスキーの<br>ギャスケット（変形）</figcaption>
+            </figure>
+        </div>
+    </section>
+    <section class="page carpet-fractal-example-2">
+        <h1>カーペットフラクタルの例</h1>
+        <div class="figure-list">
+            <figure>
+                <img src="./img/cantor_dust.png" alt="">
+                <figcaption>カントールの塵</figcaption>
+            </figure>
+            <figure>
+                <img src="./img/sierpinski_carpet.png" alt="">
+                <figcaption>シェルピンスキーのカーペット</figcaption>
+            </figure>
+        </div>
+    </section>
+    <section class="page carpet-fractal-example-3">
+        <h1>カーペットフラクタルの例</h1>
+        <div class="figure-list">
+            <figure>
+                <img src="./img/vicsek.png" alt="">
+                <figcaption>Vicsek fractal</figcaption>
+            </figure>
+            <figure>
+                <img src="./img/hexaflake.png" alt="">
+                <figcaption>Hexaflake（変形）</figcaption>
+            </figure>
+        </div>
+    </section>
+    <section class="page method-raster">
+        <h1>ラスタスキャン</h1>
+        <div class="lines">
+            <p class="line"></p>
+        </div>
+        <p class="image"><img src="./img/raster_scan.svg" alt=""></p>
+    </section>
+    <section class="page demo-4x4">
+        <h1>デモ</h1>
+        <div class="lines">
+            <p class="line link-jsdoit"><a href="http://jsdo.it/butchi/carpet_fractal_music" target="_blank">http://jsdo.it/butchi/carpet_fractal_music</a></p>
+        </div>
+        <p><iframe src="./demo/carpet_fractal_music/index.html" frameborder="0" width="300" height="130"></iframe></p>
+    </section>
+    <section class="page wave-form">
+        <h1>出力波形</h1>
+        <div class="example">
+            <p class="image"><img src="./img/4x4_1100111011111100.png" alt=""></p>
+            <p class="audio"><audio src="./audio/4x4_1100111011111100.wav" controls></p>
+        </div>
+        <p class="image"><img src="./img/waveform_4x4_1100111011111100.svg" alt=""></p>
+    </section>
+    <section class="page page-section">
+        <h1>実験</h1>
+    </section>
+    <section class="page experiment-rotation90deg">
+        <h1>実験</h1>
+        <div class="lines">
+            <p class="line">回転してみる</p>
+        </div>
+        <div class="example">
+            <p class="image"><img src="./img/4x4_1100111011111100.png" alt=""></p>
+            <p class="audio"><audio src="./audio/4x4_1100111011111100.wav" controls></p>
+        </div>
+        <div class="example">
+            <p class="image"><img src="./img/4x4_1111111101100100.png" alt=""></p>
+            <p class="audio"><audio src="./audio/4x4_1111111101100100.wav" controls></p>
+        </div>
+    </section>
+    <section class="page experiment-rotation180deg">
+        <h1>実験</h1>
+        <div class="lines">
+            <p class="line">180度回転</p>
+        </div>
+        <div class="example">
+            <p class="image"><img src="./img/4x4_1100111011111100.png" alt=""></p>
+            <p class="audio"><audio src="./audio/4x4_1100111011111100.wav" controls></p>
+        </div>
+        <div class="example">
+            <p class="image"><img src="./img/4x4_0011111101110011.png" alt=""></p>
+            <p class="audio"><audio src="./audio/4x4_0011111101110011.wav" controls></p>
+        </div>
+        <div class="lines">
+            <p class="line">→逆再生</p>
+        </div>
+    </section>
+    <section class="page experiment-swap">
+        <h1>実験</h1>
+        <div class="lines">
+            <p class="line">ジェネレータの行をずらす</p>
+        </div>
+        <div class="example">
+            <p class="image"><img src="./img/4x4_1100111011111100.png" alt=""></p>
+            <p class="audio"><audio src="./audio/4x4_1100111011111100.wav" controls></p>
+        </div>
+        <div class="example">
+            <p class="image"><img src="./img/4x4_1100011111111100.png" alt=""></p>
+            <p class="audio"><audio src="./audio/4x4_1100011111111100.wav" controls></p>
+        </div>
+    </section>
+    <section class="page experiment-generator-size">
+        <h1>実験</h1>
+        <div class="lines">
+            <p class="line">ジェネレータの大きさを変える</p>
+        </div>
+        <div class="example">
+            <h2 class="heading">6×2</h2>
+            <p class="image"><img src="./img/6x2_101111111101.png" alt=""></p>
+            <p class="audio"><audio src="./audio/6x2_101111111101.wav" controls></p>
+        </div>
+        <div class="example">
+            <h2 class="heading">9×3</h2>
+            <p class="image"><img src="./img/9x3_101111011111101111110111101.png" alt=""></p>
+            <p class="audio"><audio src="./audio/9x3_101111011111101111110111101.wav" controls></p>
+        </div>
+    </section>
+    <section class="page granular-synthesis-experiment">
+        <h1>Granular Synthesis</h1>
+        <p class="image"><img src="./img/carpet_sonification_from_wave_table.png" alt="ピアノ音のカーペット"></p>
+        <p class="audio"><audio src="./audio/carpet_sonification_from_wave_table.wav" controls></p>
+        <div class="lines">
+            <p class="line">音を細切れにして再構成</p>
+            <p class="line">→音声のビットマップをカーペット化</p>
+        </div>
+    </section>
+    <section class="page generate-oneliner">
+        <h1>ワンライン音楽による生成</h1>
+        <div class="lines">
+            <p class="line"><code><pre>(((t/1024)&amp;(t%1024))==0)?255:0</pre></code></p>
+        </div>
+        <p class="image">
+            <img src="./img/sierpinski_gasket.png" alt="シェルピンスキーのギャスケット">
+        </p>
+        <p class="audio"><audio src="./audio/sierpinski_gasket.wav" controls></p>
+    </section>
+    <section class="page">
+        <h1>まとめ</h1>
+        <ul class="lines">
+            <li class="line">カーペットフラクタルを定義</li>
+            <li class="line">音楽的な音声信号を生成</li>
+            <li class="line">可聴化インタフェースとして応用可能</li>
+        </ul>
+    </section>
+    <section class="page">
+        <h1>展望</h1>
+        <ul class="lines">
+            <li class="line">インタラクティブ</li>
+            <li class="line">様々なソース</li>
+            <li class="line">波形切り出し</li>
+            <li class="line">複数の重畳テーブル</li>
+            <li class="line">生成法の拡張</li>
+        </ul>
+    </section>
+    <section class="page">
+    </section>
+    <section class="page walsh">
+        <h1>ウォルシュ行列</h1>
+        <div class="example">
+            <p class="image"><img src="./img/walsh.png" alt=""></p>
+            <p class="audio"><audio src="./audio/walsh.wav" controls></p>
+        </div>
+    </section>
+    <section class="page self-additional">
+        <h1>自己加算カーペット</h1>
+        <div class="example">
+            <figure class="image">
+                <img src="./img/self_additional_sierpinski_gasket.png" alt="">
+                <p class="audio"><audio src="./audio/self_additional_sierpinski_gasket.wav" controls></p>
+            </figure>
+            <figure class="image">
+                <img src="./img/self_additional_fractal.png" alt="">
+                <p class="audio"><audio src="./audio/self_additional_fractal.wav" controls></p>
+            </figure>
+        </div>
+    </section>
+    <section class="page carpet-fourier">
+        <h1>フーリエ変換カーペット</h1>
+        <div class="example">
+            <figure class="image">
+                <img src="./img/carpet_fourier.png" alt="">
+                <p class="audio"><audio src="./audio/carpet_fourier.wav" controls></p>
+            </figure>
+        </div>
+    </section>
+
+    <p class="site-url"><a href="http://butchi.jp/documents/mus105/">http://butchi.jp/documents/mus105/</a></p>
+</div>
+
+<nav class="block-nav">
+    <a class="btn-option" role="button"><img src="./img/settings21.svg" alt="メニュー"></a>
+    <div class="settings">
+        <select class="view-mode">
+            <option value="presentation">プレゼンテーション</option>
+            <option value="expand">展開</option>
+        </select>
+        <ul class="page-control">
+            <li><button class="head">|&lt;</button></li>
+            <li><button class="prev">&lt;</button></li>
+            <li><button class="next">&gt;</button></li>
+            <li><button class="foot">&gt;|</button></li>
+        </ul>
+    </div>
+</nav>
+
+<script src="./js/lib/jquery-2.1.1.min.js"></script>
+<script src="./js/main.js"></script>
+
+</body>
+</html>

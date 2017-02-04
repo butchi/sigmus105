@@ -1,0 +1,165 @@
+html, body {
+}
+
+body {
+    padding: 20px;
+    font-family: serif;
+    word-break: normal;
+    text-align: justify;
+
+    line-height: 1.5em;
+}
+
+.wrapper {
+}
+
+aside {
+    color: #999;
+}
+
+article {
+    margin-top: 0.5em;
+}
+p {
+    text-indent: 1em;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-size: x-large;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+h2 {
+    font-size: large;
+    margin-top: 1em;
+}
+h3 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+h4 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+h1,h2,h3,h4{
+    font-family: sans-serif;
+}
+article {
+    > section {
+        counter-increment: section;
+        counter-reset: subsection;
+        > h1::before {
+            content: counter(section) ". ";
+        }
+        > section {
+            counter-increment: subsection;
+            > h1:before {
+                content: counter(section) "." counter(subsection) " ";
+            }
+        }
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+}
+
+// カウンターが正常に動作してないよう
+// article section > figure {
+//     counter-increment: figure;
+//     counter-reset: subfigure;
+
+//     > figure {
+//         counter-increment: subfigure;
+//     }
+// }
+
+figure {
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    text-align: center;
+    vertical-align: top;
+
+    > figcaption {
+        // p::before {
+        //     content: "図" counter(figure) " ";
+        // }
+        // p:lang(en)::before {
+        //     content: "Fig. " counter(figure) " ";
+        // }
+        text-align: center;
+        font-size: 100%;
+        display: block;
+
+        .fig-no {
+            font-weight: bold;
+        }
+    }
+
+    figure {
+        display: inline-block;
+        margin: 0 20px;
+    }
+
+    .audio {
+        display: block;
+        margin: 0 auto;
+
+        audio {
+            width: 200px;
+        }
+    }
+}
+
+math {
+    text-align: center;
+    display: block;
+}
+
+.thebibliography {
+    counter-increment: none;
+    counter-reset: none;
+
+    h1::before {
+        content: none;
+    }
+
+    ol {
+        list-style: decimal;
+        list-style-position: inside;
+    }
+
+    .bibitem {
+        line-height: 2em;
+    }
+}
+
+.block-title {
+    margin-bottom: 3em;
+
+    .title {
+        font-size: xx-large;
+
+        &:lang(en) {
+            font-size: x-large;
+        }
+    }
+
+    .author {
+        font-size: x-large;
+        margin-bottom: 1em;
+    }
+    .abstract {
+        &::before {
+            content: "概要: ";
+            font-weight: bold;
+        }
+        &:lang(en)::before {
+            content: "Abstract: ";
+        }
+    }
+}
+
+.bpJsdoit {
+    margin: 2em auto;
+}

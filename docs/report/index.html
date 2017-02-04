@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=980">
+    <title>カーペットフラクタルの可聴化と音楽生成</title>
+    <link href="./css/screen.css" media="screen, projection" rel="stylesheet" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+
+<div class="wrapper">
+    <aside class="notice">
+        <h1>注記</h1>
+        <p>数式・デモの表示にはJavaScriptが必要です．</p>
+        <p>閲覧環境はFirefox最新版を推奨します（音声・デモの再生はInternet Explorer 11以下などのブラウザには対応していません）．</p>
+    </aside>
+
+    <header class="block-title">
+        <h1 class="title">カーペットフラクタルの可聴化と音楽生成</h1>
+        <p class="author">岩淵勇樹</p>
+        <p class="abstract">フラクタル図形の一種としてカーペットフラクタルを定義する．
+            カーペットフラクタルをラスタースキャン方式によって可聴化することにより，音楽的な音声を生成することができた．
+            本手法はいくつかの2値パラメーターだけで曲を生成できるため，容易に導入できる他，直接入力以外の方法と組み合わせることも可能である．</p>
+        <h1 class="title" lang="en">Musical Sonification of Carpet Fractals</h1>
+        <p class="abstract" lang="en">We define “Carpet Fractals” a kind of fractals.
+            We discovered to be able to generate musical sounds by raster scanning from Carpet Fractals.
+            This method enable to generate various music easily by binary parameters, not only direct input.</p>
+    </header>
+
+    <article>
+        <section>
+            <h1>はじめに</h1>
+            <p>データから音楽を生成したり，聴覚を用いてデータを理解するために，可聴化という技法が研究されている．
+                可聴化はどのようなデータをソースとするかによって意味合いが変わり，またどのような出力が得られるかで聴き手の印象が大きく変わる．
+                生成音楽としては，表現できるパターンが自由すぎてテーマ性のない音楽になるか，反対にどの出力も似たり寄ったりで飽きやすいものになるということが多々ある．</p>
+            <p>提案手法では，短い数列を入力とするため，簡単な操作によって音楽を生成可能となり，さまざまなデータを可聴化させることができる．
+                また，いくつかの変形を用いることで，音の印象もある程度の多様性を与える．</p>
+        </section>
+        <section>
+            <h1>背景</h1>
+            <p>フラクタルやセルオートマトンなど，数学的なデータを可聴化する試みは数多くされているが<a class="cite" href="#bib_lifegorch">[引用]</a>, <a class="cite" href="#bib_wolframtones">[引用]</a>, <a class="cite" href="#bib_fractmus">[引用]</a>，それらの多くは数値を音高に割り当てたメロディ生成で，直接音として鳴らす例は少ない．</p>
+            <p>著者らはこれまで，閉曲線に対する形状操作等の直接操作によって周期音声信号を変化させる方式による音色の操作方法を提案してきた<a class="cite" href="#bib_closynth2011"></a>．
+                これは画像と音声の相互変換の一手法であるが，生成できるのは音色であり，音楽生成とはなっていない．</p>
+            <p>画像を音声に変換する方法として，テクスチャなどをラスタスキャンする研究もされており<a class="cite" href="#bib_rasterscan">[引用]</a>，幾何学的図形をこの方法で可聴化することにより，従来のシンセサイザと同等な音声を生成することが可能である．</p>
+            <p>その一方で，数値演算を音楽に応用する方法として，プログラミングにおける初等的な演算を用いて音楽を生成する，ワンライン音楽が発見された<a class="cite" href="#bib_onelinerarxiv">[引用]</a></p>
+            <p>音色とメロディを同時に生成する音楽的な可聴化である．
+                提案手法はワンライン音楽よりは音階の豊かさは乏しいが，同様に音色とメロディを同時に生成する．</p>
+        </section>
+        <section>
+            <h1>カーペットフラクタル音楽</h1>
+            <section id="sec_generate">
+                <h1>カーペットフラクタルの定義と生成法</h1>
+                <p>ジェネレータ$B$として$m \times n$の2次元配列を設定する．
+                    各要素$a_{ij}$には$0$か$1$が割り当てられる．</p>
+                <p>
+                    \begin{eqnarray}
+                        B = 
+                        \begin{bmatrix}
+                          a_{11} & a_{21} & \cdots & a_{m1}\\
+                          a_{12} & a_{22} & \cdots & a_{m2}\\
+                          \vdots & \vdots & \ddots & \vdots\\
+                          a_{1n} & a_{2n} & \cdots & a_{mn}
+                        \end{bmatrix}
+                    \end{eqnarray}
+                </p>
+                <p>2次元配列の各要素に以下の置換を行う．</p>
+                <p>
+                    \begin{eqnarray}
+                        \left\{
+                        0 \rightarrow 0 B
+                        , 
+                        1 \rightarrow B
+                        \right\}
+                    \end{eqnarray}
+                </p>
+                <p>$0 B$はすなわち$m \times n$の$0$のみによる2次元配列である．
+                    1回の置換操作により，要素数は横に$m$倍，縦に$n$倍になる．</p>
+                <p>この置換を初期配列$\begin{bmatrix}1\end{bmatrix}$を起点として順次適用し，各ステップ毎に単位正方形上に縮小してプロットした図形の極限をカーペットフラクタルと定義する．</p>
+                <p>例えば，ジェネレータを以下のように設定すると，<a class="figref" href="#fig_sierpinski_carpet">図</a>に示されるシェルピンスキーのカーペット$S$が生成される．
+                    なお，要素の値が$0$である点を白，$1$である点を黒としている．</p>
+                <p>
+                    \begin{eqnarray}
+                        B =
+                        \begin{bmatrix}
+                            1 & 1 & 1 \\
+                            1 & 0 & 1 \\
+                            1 & 1 & 1
+                        \end{bmatrix}
+                    \end{eqnarray}
+
+                    \begin{eqnarray}
+                        S_0 =
+                        \begin{bmatrix}
+                            1
+                        \end{bmatrix}
+                        ,
+                        S_1 =
+                        \begin{bmatrix}
+                            1 & 1 & 1 \\
+                            1 & 0 & 1 \\
+                            1 & 1 & 1
+                        \end{bmatrix}
+                        \nonumber \\
+                        S_2 =
+                        \begin{bmatrix}
+                            1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+                            1 & 0 & 1 & 1 & 0 & 1 & 1 & 0 & 1 \\
+                            1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+                            1 & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 1 \\
+                            1 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 1 \\
+                            1 & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 1 \\
+                            1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+                            1 & 0 & 1 & 1 & 0 & 1 & 1 & 0 & 1 \\
+                            1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1
+                        \end{bmatrix}
+                        \nonumber
+                    \end{eqnarray}
+                </p>
+                <figure id="fig_sierpinski_carpet">
+                    <img src="./img/sierpinski_carpet.png" alt="シェルピンスキーのカーペット" height="200">
+                    <div class="audio"><audio src="./audio/sierpinski_carpet.wav" controls></audio></div>
+                    <figcaption>
+                        <p>シェルピンスキーのカーペット</p>
+                        <p lang="en">Sierpinski carpet.</p>
+                    </figcaption>
+                </figure>
+
+                <p>また，別の例としてシェルピンスキーのギャスケットの変形$G$を挙げる．</p>
+
+                <p>
+                    \begin{eqnarray}
+                        B =
+                        \begin{bmatrix}
+                            1 & 1 \\
+                            1 & 0
+                        \end{bmatrix}
+                    \end{eqnarray}
+
+                    \begin{eqnarray}
+                        G_0 =
+                        \begin{bmatrix}
+                            1
+                        \end{bmatrix}
+                        ,
+                        G_1 =
+                        \begin{bmatrix}
+                            1 & 1 \\
+                            1 & 0
+                        \end{bmatrix}
+                        ,
+                        G_2 =
+                        \begin{bmatrix}
+                            1 & 1 & 1 & 1 \\
+                            1 & 0 & 1 & 0 \\
+                            1 & 1 & 0 & 0 \\
+                            1 & 0 & 0 & 0 \\
+                        \end{bmatrix}
+                        \nonumber
+                    \end{eqnarray}
+                </p>
+                <p>これらの図形は自己アフィンフラクタルのうちの限定的な集合であり，
+                    その他有名なフラクタル図形であるカントールの塵，Vicsek fractal，Hexaflake（変形）などもこの方法で生成可能である（<a class="figref" href="#fig_carpet_fractals_famous">図</a>）．</p>
+
+                <figure id="fig_carpet_fractals_famous">
+                    <figure>
+                        <img src="./img/sierpinski_gasket.png" alt="" height="200">
+                        <div class="audio"><audio src="./audio/sierpinski_gasket.wav" controls></audio></div>
+                        <figcaption>
+                            <p>(a) シェルピンスキーのギャスケット（変形）</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./img/cantor_dust.png" alt="" height="200">
+                        <div class="audio"><audio src="./audio/cantor_dust.wav" controls></audio></div>
+                        <figcaption>
+                            <p>(b) カントールの塵</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./img/vicsek.png" alt="" height="200">
+                        <div class="audio"><audio src="./audio/vicsek.wav" controls></audio></div>
+                        <figcaption>
+                            <p>(c) Vicsek Fractal</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./img/hexaflake.png" alt="" height="200">
+                        <div class="audio"><audio src="./audio/hexaflake.wav" controls></audio></div>
+                        <figcaption>
+                            <p>(d) Hexaflake（変形）</p>
+                        </figcaption>
+                    </figure>
+                    <figcaption>
+                        <p>有名なカーペットフラクタル</p>
+                        <p lang="en">Famous carpet fractal.</p>
+                    </figcaption>
+                </figure>
+
+                <p><a class="figref" href="#fig_carpet_fractals_example">図</a>にカーペットフラクタルの例としてジェネレータと生成図形を示す．</p>
+
+                <figure id="fig_carpet_fractals_example">
+                    <figure>
+                        <img src="./img/4x4_1100111011111100_1.png" alt="" height="200">
+                        <figcaption>
+                            <p>(a1) $P$のジェネレータ</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./img/4x4_1100111011111100_5.png" alt="" height="200">
+                        <div class="audio"><audio src="./audio/4x4_1100111011111100.wav" controls></audio></div>
+                        <figcaption>
+                            <p>(a2) $P_5$</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./img/4x4_1100011111111100_1.png" alt="" height="200">
+                        <figcaption>
+                            <p>(b1) $Q$のジェネレータ</p>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./img/4x4_1100011111111100_5.png" alt="" height="200">
+                        <div class="audio"><audio src="./audio/4x4_1100011111111100.wav" controls></audio></div>
+                        <figcaption>
+                            <p>(b2) $Q_5$</p>
+                        </figcaption>
+                    </figure>
+                    <figcaption>
+                        <p>カーペットフラクタルの例</p>
+                        <p lang="en">Examples of carpet fractal.</p>
+                    </figcaption>
+                </figure>
+            </section>
+            <section>
+                <h1>カーペットフラクタルの可聴化</h1>
+                <p>カーペットフラクタルの途中段階をラスタ走査によりPCM信号化することにより可聴化する<a class="figref" href="#fig_raster_scan">図</a>）．</p>
+
+                <figure id="fig_raster_scan">
+                    <img src="./img/raster_scan.svg" alt="ラスタスキャン" height="200">
+                    <figcaption>
+                        <p>ラスタスキャン</p>
+                        <p lang="en">Raster scanning.</p>
+                    </figcaption>
+                </figure>
+
+                <p>例えば，<a class="ref" href="#sec_generate">節</a>で例示したシェルピンスキーのギャスケット$G_2$は以下のような1次元信号に変換される．</p>
+
+                <p>$[1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0]$</p>
+
+                <p>これはサンプル数$16$となり，サンプリング周波数$8000$[Hz]で再生すると$0.002$秒の音声出力が得られる．
+                    これでは短くて音楽的に聴こえないが，$G_{10}$では同様にして約$131$秒の音声出力が得られる．
+                </p>
+
+                <p>例として，<a class="figref" href="#fig_waveform">図</a>に$P_2$から生成される波形を示す．</p>
+
+                <figure id="fig_waveform">
+                    <img src="./img/waveform_4x4_1100111011111100.svg" alt="カーペットの波形の例" height="200">
+                    <figcaption>
+                        <p>カーペットの波形の例</p>
+                        <p lang="en">Example of wave form of carpet.</p>
+                    </figcaption>
+                </figure>
+
+                <p>今回はデモプログラムとして$4 \times 4$の大きさのジェネレータを用いた置換回数$5$回，サンプリング周波数$8192$[Hz]の<a href="//jsdo.it/butchi/carpet_fractal_music">可聴化プログラム</a>を作成した．
+                    本プログラムでは$2^{16} = 65536$通りの音声信号を生成できる．</p>
+
+                <script type="text/javascript" src="http://jsdo.it/blogparts/oUsV/js?width=465&height=496&view=play"></script>
+            </section>
+        </section>
+        <section>
+            <h1>他の音声合成方法との関わり</h1>
+            <section>
+                <h1>Scanned Synthesisとしてのカーペットフラクタル音楽</h1>
+
+                <p>Max Mathewsらによって1998-2000年に開発・提唱された新しい物理モデル音源方式として，Scanned Synthesisがある<a class="cite" href="#bib_scannedsynthesis">[引用]</a>, <a class="cite" href="#bib_csounds">[引用]</a> ．物理モデルで決定される動的な点群を任意の曲線で走査（サンプリング）することによって音声信号を生成する手法であり，これにより，リアルタイムに減衰などの変化をする音を生成することができる．
+                    また，これに関連した音合成方式として，地表面軌道合成（Wave Terrain Synthesis，波形地表面合成とも呼ばれる）が提案されている<a class="cite" href="#bib_bookcomputermusic">[引用]</a>, <a class="cite" href="#bib_kosakasynthesis">[引用]</a>．これは，静的な2変数関数（地表面）を任意の曲線で走査し，走査したそれぞれの点での関数値を波形値とする方式である．Scanned Synthesisでは時間的に変化する動的な物理モデルを用いるのに対し，地表面軌道合成では時間的に固定された静的な地表面を用いる．また，Scanned Synthesisでは，点群の連結が弦のように1次元的であったり格子状のように2次元的であったりと次元が自由であるのに対し，地表面軌道合成では地表面が2変数関数に限られる．</p>
+
+                <p>カーペットフラクタル音楽は，$0$と$1$を値としてもつフラクタル平面を，多数の並行な直線で走査（ラスタスキャン）するため，Wave Terrain Synthesisの一種ともいえる（ただし，走査経路は閉曲線ではないため厳密には異なる）．</p>
+            </section>
+            <section>
+                <h1>Granular Synthesisとしてのカーペットフラクタル音楽</h1>
+
+                <p>Granular Synthesis（細粒合成，グラニュラー合成）<a class="cite" href="#bib_bookcomputermusic">[引用]</a>, <a class="cite" href="#bib_kosakasynthesis">[引用]</a>とは，1〜100[ms]程度の粒子（grain）を時間軸上に多数配置して音声を生成する音声合成方法である．
+                    カーペットフラクタルによる音声変調の一つとして，細粒合成の考えを基に，音声信号をジェネレータとしたカーペットおよび音声信号の生成を試みた（<a class="figref" href="#fig_carpet_sonification_from_wave_table">図</a>）．
+                    これはサンプリング周波数$44100$[Hz]で約6秒のピアノの音声信号を一定間隔ごとに区切り，$591$[px] $\times$ $473$[px]の画像を作り，$Q$のジェネレータ（<a class="figref" href="#fig_carpet_fractals_example"></a>(b1)）の配置でコピーしラスタスキャンを行ったものである．
+                    聞こえとしては，元のピアノ音がプツプツと途切れた音として4倍の長さで音色を変えながら4回鳴る，という結果が得られた．
+                    これは矩形パルスをgrainとしたGranular Synthesisといえる．
+                    置換回数が1回のみなのでフラクタルとは言えないが，このように音声加工に応用することも可能である．</p>
+
+                <figure id="fig_carpet_sonification_from_wave_table">
+                    <img src="./img/carpet_sonification_from_wave_table.png" alt="ピアノ音を元にしたカーペット" height="200">
+                    <div class="audio"><audio src="./audio/carpet_sonification_from_wave_table.wav" controls></audio></div>
+                    <figcaption>
+                        <p>ピアノ音を元にしたカーペット</p>
+                        <p lang="en">Carpet with piano sound.</p>
+                    </figcaption>
+                </figure>
+            </section>
+            <section>
+                <h1>ワンライン音楽による生成</h1>
+
+                <p><a href="#sec_generate">節</a>で例示したシェルピンスキーのギャスケット$G_{10}$を，
+                    生成コードが30文字程度の<a href="http://jsdo.it/butchi/sierpinski_gasket_music">プログラム</a>で再現できた．</p>
+                <pre><code>(((t/1024)&amp;(t%1024))==0)?255:0</code></pre>
+
+                <script type="text/javascript" src="http://jsdo.it/blogparts/g1jE/js?width=465&height=496&view=javascript"></script>
+
+                <p>従来のワンライン音楽でもシェルピンスキーのギャスケットが描かれるプログラムが存在するが，それは時間-振幅値での表示であり，それとは異なる．</p>
+
+                <p>一般のカーペットフラクタルも同様の手法でプログラムを作成できる可能性があり，ワンライン音楽上の研究として還元することができるかもしれない．</p>
+            </section>
+        </section>
+        <section>
+            <h1>考察</h1>
+
+            <p>ジェネレータのある1行が横に回転されても生成される音楽の聴こえは変わらない．</p>
+
+            <p>ジェネレータに1が多いと継続音が多くなり，1が少ないと逆にパルス音が多くなる．</p>
+
+            <p>今回生成したカーペットフラクタルによる音楽は振幅値が0か1，つまり1ビットの音楽である．
+                これはすなわち矩形波の組み合わせとなるため，矩形波に近い音色に凝り固まってしまう．0と1の中間値の濃淡を持たせるフラクタル生成法を用いることによりさらに多様な音色を作ることができると考えられる．</p>
+
+            <p>カーペットフラクタル音楽の拍子はジェネレータの縦幅に起因する．
+                縦幅が偶数の場合，4つ打ち的なビートに聞こえる．</p>
+
+            <p>カーペットの反復回数によってメロディが一緒に大幅に変わってしまうため，同じ反復を繰り返すのではなく，リズムパターンで重畳するなどの工夫もあると音楽制作に有用と思われる．
+                また，カーペットフラクタル音楽は高周波を多く含むため，音楽活用の際にはLPFを通すなど，ある程度の加工があることが望ましいと考えられる．</p>
+
+            <p>カーペットでの置換の際，ジェネレータが$x$軸方向にコピーされることによってパルス幅変調（PWM）のような効果が得られる．
+                例えば，以下のジェネレータを用いると，パルス幅が徐々に広がるような音声が生成される．</p>
+
+            <p>
+                \begin{eqnarray}
+                    \begin{bmatrix}
+                        0 & 0 & 0 & 1 \\
+                        0 & 0 & 1 & 1 \\
+                        0 & 1 & 1 & 1 \\
+                        1 & 1 & 1 & 1 \\
+                    \end{bmatrix}
+                    \nonumber
+                \end{eqnarray}
+            </p>
+            <div class="audio"><audio src="./audio/4x4_0001001101111111.wav" controls></audio></div>
+
+            <p>ワンライン音楽は短い式で曲を生成できるが，演算子を適切に使うことに熟練を要する．一方，カーペットフラクタル音楽はいくつかの2値パラメーターだけで曲を生成できるため，容易に導入できる他，直接入力以外の方法（画像データやセンサー入力など）と組み合わせることも可能である．</p>
+        </section>
+
+        <section>
+            <h1>まとめと展望</h1>
+
+            <p>カーペットフラクタルから音楽的な音声信号を得ることができた．
+                今後は提案法を元に，インタラクティブコンテンツへの応用などを行いたい．
+                また，現在$2$値であるパラメータを実数値にしたり，配列置換とは異なるステップを用いるなど生成法を工夫することにより，さらに面白みのある音楽生成をできるようにしたい．
+                本研究では音楽を作れることが特徴の一つではあるが，部分的に波形を切り出してDTMにおける音色生成ロジックに利用することも期待される．
+            </p>
+        </section>
+
+        <section class="thebibliography">
+            <h1>参考文献</h1>
+            <ol class="list-bibliography">
+                <li class="bibitem" id="bib_lifegorch">Ogawa, K. and Kuhara, Y.:
+                    Life Game Orchestra as an Interactive Music Composition System Translating Cellular Patterns of Automata into Musical Scales,
+                    The 9th International Conference on New Interfaces for Musical Expression (2009).</li>
+                <li class="bibitem" id="bib_wolframtones">Wolfram Research:
+                    <a href="http://tones.wolfram.com/">WolframTones: An Experiment in a New Kind of Music</a>.</li>
+                <li class="bibitem" id="bib_fractmus">Díaz-Jerez, G.:
+                    <a href="http://www.gustavodiazjerez.com/?cat=14">FractMus Overview</a>.</li>
+                <li class="bibitem" id="bib_rasterscan">Yeo W. S. and J. Berger:
+                    Application of raster scanning method to image sonification, sound visualization, sound analysis and synthesis,
+                    Proc of the 9th Int. Conference on Digital Audio Effects (2006).</li>
+                <li class="bibitem" id="bib_onelinerarxiv">Heikkilä, V.:
+                    Discovering novel computer music techniques by exploring the space of short computer programs,
+                    arXiv (2011).</li>
+                <li class="bibitem" id="bib_closynth2011">岩淵勇樹・秋田純一・北川章夫:
+                    閉曲線を利用した音色の操作法，
+                    芸術科学会論文誌 Vol.10(2011).</li>
+                <li class="bibitem" id="bib_scannedsynthesis">Boulanger, R., Smaragdis, P., and Ffitch, J.:
+                    Scanned synthesis: An introduction and
+                    demonstration of a new synthesis and signal processing technique,
+                    In Proceedings of the 2000 International Computer Music Conference (2000).</li>
+                <li class="bibitem" id="bib_csounds">cSounds.com:
+                    <a href="http://www.csounds.com/scanned/">scanned synthesis</a>.</li>
+                <li class="bibitem" id="bib_bookcomputermusic">青柳龍也, 小坂直敏, 平田圭二, 堀内靖雄:
+                    コンピュータ音楽―歴史・テクノロジー・アート―，
+                    東京電機大学出版局(2001).</li>
+                <li class="bibitem" id="bib_kosakasynthesis">小坂直敏:
+                    コンピュータ音楽で用いる珍しい音合成方式，
+                    音響学会音楽音響研究会資料(2005).</li>
+            </ol>
+        </section>
+
+        <!--
+        <section class="special-thanks">
+            <h1>謝辞</h1>
+            <p>本研究を進めるにあたり，多くの有益な討論を行い，また，ご助言を頂きました，面白法人カヤックの君塚史高氏，中山祐平氏，藤澤伸氏，比留間和也氏，黄辰琳氏，五十川洋平氏，後藤理華氏，本多大和氏，田島真悟氏，中農稔氏，月田小百合氏，天野清之氏，土居真也氏，首都大学東京の中西恭介氏，与羽翼氏に心から謝意を表します．<a href="http://facebook.com">Facebook</a>の友人，<a href="http://twitter.com/">Twitter</a>のフォロワーの皆さんもどうもありがとうございます．</p>
+        </section>
+        -->
+    </article>
+    <footer><a href="http://butchi.jp/">Home</a></footer>
+</div>
+
+<script src="./js/lib/jquery-2.1.1.min.js"></script>
+<script src="./js/main.js"></script>
+
+</body>
+</html>

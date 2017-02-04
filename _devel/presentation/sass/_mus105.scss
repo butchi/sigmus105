@@ -1,0 +1,420 @@
+.page {
+    &.page-top {
+        .site {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+
+            color: #fff;
+            font-size: 12px;
+        }
+    }
+
+    &.introduction {
+        .image {
+            font-size: 0;
+            text-align: center;
+
+            padding-bottom: 10px;
+
+            img {
+                width: auto;
+                height: 80px;
+            }
+        }
+    }
+
+    &.intro-raster {
+        .image {
+            text-align: center;
+
+            img {
+                width: auto;
+                height: 100px;
+            }
+        }
+
+        .footnote {
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+
+            font-size: 6px;
+        }
+    }
+
+    &.wolfram-tones {
+        .image {
+            text-align: center;
+
+            img {
+                width: auto;
+                height: 100px;
+
+                border: 1px solid #999;
+            }
+        }
+    }
+    
+    &.fractmus {
+        .image {
+            text-align: center;
+
+            img {
+                width: auto;
+                height: 100px;
+            }
+        }
+    }
+    
+    &.scanned-synthesis {
+        .image {
+            text-align: center;
+            img {
+                width: 100px;
+            }
+
+            margin-bottom: 5px;
+        }
+
+        .audio {
+            text-align: center;
+            @include transform(scale(0.3));
+
+            audio {
+                width: 300px;
+            }
+        }
+
+        .footnote {
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+
+            font-size: 6px;
+        }
+    }
+
+    &.closynth {
+        .link-closynth {
+            font-size: 80%;
+        }
+
+        .image {
+            text-align: center;
+
+            img {
+                width: auto;
+                height: 90px;
+
+                border: 1px solid #999;
+            }
+        }
+    }
+
+    &.oneliner {
+        .embed {
+            text-align: center;
+        }
+    }
+
+    &.carpet-fractal-definition, &.carpet-fractal-definition-2 {
+        .image {
+            text-align: center;
+
+            img {
+                width: auto;
+                height: 80px;
+            }
+        }
+    }
+
+    &.carpet-fractal-example-1, &.carpet-fractal-example-2, &.carpet-fractal-example-3 {
+        .figure-list {
+            text-align: center;
+
+            figure {
+                vertical-align: top;
+                display: inline-block;
+
+                img {
+                    width: auto;
+                    height: 100px;
+                }
+
+                figcaption {
+                    font-size: 12px;
+
+                    padding-top: 10px;
+                }
+
+                & + figure {
+                    margin-left: 20px;
+                }
+            }
+        }
+    }
+
+    &.method-raster {
+        .image {
+            text-align: center;
+
+            img {
+                width: auto;
+                height: 120px;
+            }
+        }
+    }
+
+    &.wave-form {
+        .example {
+            .image {
+                text-align: center;
+                img {
+                    width: 50px;
+                }
+
+                margin-bottom: 0px;
+            }
+
+            .audio {
+                text-align: center;
+                @include transform(scale(0.3));
+            }
+        }
+
+        .image {
+            text-align: center;
+
+            img {
+                width: 270px;
+                height: auto;
+            }
+        }
+    }
+
+    &.demo-4x4 {
+        .link-jsdoit {
+            font-size: 80%;
+        }
+    }
+
+    &.experiment-generator-size {
+        .example {
+            .heading {
+                text-align: left;
+                padding-left: 30px;
+            }
+
+            .image {
+                text-align: center;
+                img {
+                    width: 250px;
+                }
+
+                margin-bottom: 5px;
+            }
+
+            .audio {
+                text-align: center;
+                @include transform(scale(0.5));
+            }
+
+            & + .example {
+                margin-top: 10px;
+            }
+        }
+    }
+
+    &.experiment-rotation90deg, &.experiment-rotation180deg, &.experiment-swap {
+        .example {
+            display: block;
+            width: 150px;
+            float: left;
+
+            .image {
+                text-align: center;
+                img {
+                    width: 60px;
+                }
+
+                margin-bottom: 5px;
+            }
+
+            .audio {
+                text-align: center;
+                @include transform(scale(0.3));
+
+                audio {
+                    width: 300px;
+                }
+            }
+
+            & + .example {
+                margin-left: 0px;
+            }
+        }
+    }
+
+    &.granular-synthesis-experiment {
+        .image {
+            text-align: center;
+            img {
+                width: 70px;
+            }
+
+            margin-bottom: 5px;
+        }
+
+        .audio {
+            text-align: center;
+            @include transform(scale(0.3));
+
+            audio {
+                width: 300px;
+            }
+        }
+    }
+
+    &.generate-oneliner {
+        .image {
+            text-align: center;
+            img {
+                width: 70px;
+            }
+
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .audio {
+            text-align: center;
+            @include transform(scale(0.3));
+
+            audio {
+                width: 300px;
+            }
+        }
+    }
+
+    &.walsh {
+        .example {
+            display: block;
+            width: 150px;
+
+            position: relative;
+            left: 50%;
+            margin-left: -75px;
+
+            .image {
+                text-align: center;
+                img {
+                    width: 110px;
+                }
+
+                margin-bottom: 5px;
+            }
+
+            .audio {
+                text-align: center;
+                @include transform(scale(0.3));
+
+                audio {
+                    width: 300px;
+                }
+            }
+
+            & + .example {
+                margin-left: 0px;
+            }
+        }
+    }
+
+    &.self-additional, &.carpet-fourier {
+        .example {
+            display: block;
+            width: 300px;
+
+            position: relative;
+            left: 50%;
+            margin-left: -150px;
+
+            text-align: center;
+
+            .image {
+                display: inline-block;
+
+                width: 90px;
+
+                text-align: center;
+                img {
+                    width: 80px;
+                }
+
+                margin-bottom: 5px;
+            }
+
+            .audio {
+                text-align: center;
+                @include transform(scale(0.3));
+
+                audio {
+                    width: 300px;
+                }
+            }
+
+            & + .example {
+                margin-left: 0px;
+            }
+        }
+    }
+}
+
+.theme-sierpinski {
+    .page {
+        h1 {
+            $img-l: "bg_l.png";
+            $img-r: "bg_r.png";
+            color: #fff;
+            background-color: #54f;
+            background-image: image-url($img-l), image-url($img-r);
+            background-repeat: no-repeat, no-repeat;
+            background-size: auto 100%, auto 100%;
+            background-position: 0% 0%, 100% 100%;
+
+            padding: 5px 0;
+            margin-bottom: 5px;
+        }
+    }
+
+    .page.page-top {
+        h1 {
+            $img: "bg_l.png";
+
+            background: none;
+            background-color: #54f;
+            color: #fff;
+            padding-top: 50px;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+
+            background-image: image-url($img);
+            background-repeat: no-repeat;
+            background-size: auto 64px;
+            background-position: 0 0;
+        }
+    }
+
+    .page.page-section {
+        h1 {
+            position: absolute;
+            height: 50px;
+            line-height: 50px;
+            top: 50%;
+            margin-top: -25px;
+            width: 100%;
+            color: #fff;
+            background-color: #54f;
+        }
+    }
+}

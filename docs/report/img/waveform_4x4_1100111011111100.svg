@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" width="354px" height="92px" viewBox="0 0 354 92" enable-background="new 0 0 354 92" xml:space="preserve">
+<g>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M35.381,62.5h3.15 M347.781,62.5h-3.15
+		 M31.181,62.5"/>
+	<text transform="matrix(1 0 0 1 25.3467 64.8306)" font-family="'Helvetica'" font-size="7"> 0</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M31.181,62.5 M35.381,52.1h3.15 M347.781,52.1
+		h-3.15 M31.181,52.1"/>
+	<text transform="matrix(1 0 0 1 19.5107 54.4322)" font-family="'Helvetica'" font-size="7"> 0.2</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M31.181,52.1 M35.381,41.7h3.15 M347.781,41.7
+		h-3.15 M31.181,41.7"/>
+	<text transform="matrix(1 0 0 1 19.5107 44.0337)" font-family="'Helvetica'" font-size="7"> 0.4</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M31.181,41.7 M35.381,31.25h3.15 M347.781,31.25
+		h-3.15 M31.181,31.25"/>
+	<text transform="matrix(1 0 0 1 19.5107 33.5806)" font-family="'Helvetica'" font-size="7"> 0.6</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M31.181,31.25 M35.381,20.85h3.15 M347.781,20.85
+		h-3.15 M31.181,20.85"/>
+	<text transform="matrix(1 0 0 1 19.5107 23.1822)" font-family="'Helvetica'" font-size="7"> 0.8</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M31.181,20.85 M35.381,10.45h3.15 M347.781,10.45
+		h-3.15 M31.181,10.45"/>
+	<text transform="matrix(1 0 0 1 25.3467 12.7837)" font-family="'Helvetica'" font-size="7"> 1</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M31.181,10.45 M35.381,67.7v-3.15 M35.381,5.25
+		V8.4 M35.381,74.7"/>
+	<text transform="matrix(1 0 0 1 32.4639 77.0337)" font-family="'Helvetica'" font-size="7"> 0</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M35.381,74.7 M96.381,67.7v-3.15 M96.381,5.25
+		V8.4 M96.381,74.7"/>
+	<text transform="matrix(1 0 0 1 91.5186 77.0337)" font-family="'Helvetica'" font-size="7"> 50</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M96.381,74.7 M157.431,67.7v-3.15 M157.431,5.25
+		V8.4 M157.431,74.7"/>
+	<text transform="matrix(1 0 0 1 150.6279 77.0337)" font-family="'Helvetica'" font-size="7"> 100</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M157.431,74.7 M218.431,67.7v-3.15 M218.431,5.25
+		V8.4 M218.431,74.7"/>
+	<text transform="matrix(1 0 0 1 211.6201 77.0337)" font-family="'Helvetica'" font-size="7"> 150</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M218.431,74.7 M279.431,67.7v-3.15 M279.431,5.25
+		V8.4 M279.431,74.7"/>
+	<text transform="matrix(1 0 0 1 272.6201 77.0337)" font-family="'Helvetica'" font-size="7"> 200</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M279.431,74.7 M340.481,67.7v-3.15 M340.481,5.25
+		V8.4 M340.481,74.7"/>
+	<text transform="matrix(1 0 0 1 333.6748 77.0337)" font-family="'Helvetica'" font-size="7"> 250</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M340.481,74.7 M35.381,67.7h312.4V5.25h-312.4
+		V67.7"/>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M6.681,36.5"/>
+	<text transform="matrix(0 -1 1 0 9.0107 51.6743)" font-family="'Helvetica'" font-size="7">amplitude</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M6.681,36.5 M191.581,85.2"/>
+	<text transform="matrix(1 0 0 1 178.5576 87.5337)" font-family="'Helvetica'" font-size="7">samples</text>
+	<path fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M191.581,85.2"/>
+	<path fill="none" stroke="#000000" stroke-width="0.25" stroke-miterlimit="10" d="M35.381,10.45h0.6h1.25V62.5h1.2h1.2V10.45h1.25
+		h1.2V62.5h1.25h1.2h1.2h1.25h1.2h1.25h1.2h1.2h1.25h1.2V10.45h1.25h1.2h1.25V62.5h1.2V10.45h1.2h1.25h1.2V62.5h1.25h1.2h1.2h1.25
+		h1.2h1.25h1.2h1.2h1.25V10.45h1.2h1.25h1.2h1.2h1.25h1.2h1.25h1.2V62.5h1.2h1.25h1.2h1.25h1.2h1.2h1.25h1.2V10.45h1.25h1.2V62.5
+		h1.25h1.2V10.45h1.2h1.25V62.5h1.2h1.25h1.2h1.2h1.25h1.2h1.25h1.2h1.2h1.25V10.45h1.2h1.25V62.5h1.2h1.2V10.45h1.25h1.2V62.5h1.25
+		h1.2V10.45h1.2h1.25V62.5h1.2h1.25h1.2h1.2h1.25h1.2V10.45h1.25h1.2h1.25 M136.081,10.45V62.5h1.2V10.45h1.2h1.25h1.2V62.5h1.25
+		V10.45h1.2h1.2h1.25V62.5h1.2h1.25h1.2h1.2h1.25V10.45h1.2h1.25h1.2h1.2h1.25h1.2h1.25h1.2h1.2h1.25h1.2h1.25V62.5h1.2h1.2h1.25
+		h1.2V10.45h1.25h1.2V62.5h1.25h1.2V10.45h1.2h1.25V62.5h1.2h1.25V10.45h1.2h1.2V62.5h1.25h1.2h1.25h1.2h1.2h1.25V10.45h1.2h1.25
+		V62.5h1.2h1.2V10.45h1.25h1.2V62.5h1.25h1.2V10.45h1.2h1.25V62.5h1.2h1.25V10.45h1.2h1.2V62.5h1.25h1.2V10.45h1.25h1.2h1.25V62.5
+		h1.2V10.45h1.2h1.25h1.2V62.5h1.25V10.45h1.2h1.2h1.25V62.5h1.2V10.45h1.25h1.2h1.2 M228.781,10.45V62.5h1.25V10.45h1.2h1.25h1.2
+		h1.2h1.25h1.2h1.25h1.2h1.2h1.25h1.2h1.25h1.2h1.2h1.25h1.2h1.25h1.2V62.5h1.25h1.2V10.45h1.2h1.25V62.5h1.2h1.25V10.45h1.2h1.2
+		V62.5h1.25h1.2V10.45h1.25h1.2V62.5h1.2h1.25V10.45h1.2h1.25V62.5h1.2h1.2V10.45h1.25h1.2V62.5h1.25h1.2h1.2h1.25h1.2h1.25h1.2h1.2
+		h1.25h1.2V10.45h1.25h1.2h1.25V62.5h1.2V10.45h1.2h1.25h1.2V62.5h1.25h1.2h1.2h1.25h1.2h1.25h1.2h1.2h1.25V10.45h1.2h1.25h1.2h1.2
+		h1.25h1.2h1.25h1.2V62.5h1.2h1.25h1.2h1.25h1.2h1.2h1.25h1.2V10.45h1.25h1.2V62.5 M330.081,62.5h1.25h1.2V10.45h1.2h1.25V62.5h1.2
+		h1.25h1.2h1.2h1.25h1.2h1.25h1.2h1.2h1.25"/>
+	<polyline fill="none" stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" points="35.381,67.7 347.781,67.7 347.781,5.25 
+		35.381,5.25 35.381,67.7 	"/>
+</g>
+</svg>

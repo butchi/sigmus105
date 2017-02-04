@@ -1,0 +1,56 @@
+body {
+    background-color: #fff;
+}
+
+.display-area {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    
+    margin-bottom: 20px;
+
+    float: left;
+}
+
+#fractalImg {
+    width: 100px;
+    height: 100px;
+}
+
+#scanLine {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100px;
+    height: 1px;
+    background-color: #f00;
+    
+    box-shadow: 0px 0px 1px 1px rgba(255,255,255,1);
+}
+
+.edit-panel {
+    float: left;
+}
+
+.edit-table td {
+    width: 22px;
+    height: 22px;
+}
+
+.generator {
+    width: 16px;
+    height: 16px;
+}
+
+.player-panel {
+    float: left;
+    margin: 0;
+}
+
+.player-panel button {
+    display: block;
+    width: 60px;
+    height: 30px;
+    
+    margin-top: 10px;
+}
